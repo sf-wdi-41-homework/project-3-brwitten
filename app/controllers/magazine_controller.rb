@@ -1,0 +1,2 @@
+class MagazineController < ApplicationController
+end
