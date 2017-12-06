@@ -10,4 +10,5 @@ Through Two Nouns users can create their own magazines with content from across 
 * Ruby
 * Ruby on Rails
 * Diffbot
+* Prawn
 * Bcrypt

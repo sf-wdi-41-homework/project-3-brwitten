@@ -1,7 +1,10 @@
-<h1> Let's make a magazine! </h1>
 
-<p> Which links would you like to include? </p>
-<%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
-  <%= text_field_tag :search, params[:url_input], placeholder: "Put URL here...", :required => true %>
-  <%= submit_tag("Submit") %>
-<% end %>
+<body>
+  <h1> Make your magazine. </h1>
+
+  <p> Which links would you like to include? </p>
+  <%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
+    <%= text_field_tag :search, params[:url_input], placeholder: "Put URL here...", :required => true %>
+    <%= submit_tag("Submit") %>
+  <% end %>
+</body>

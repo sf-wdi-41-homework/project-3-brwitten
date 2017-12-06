@@ -4,21 +4,45 @@
 
 body {
   font-family: 'Lato', sans-serif;
+  padding-left: 2%;
+  padding-right: 2%;
+  min-height: 100%;
+  margin-bottom: -100px;
+}
+
+.landing {
   text-align: center;
-  padding-top: 7%;
+}
+
+.landing:after {
+    content: "";
+    display: block;
+    height: 140px;
 }
 
 #welcome {
   font-family: 'Lobster Two', cursive;
   font-size: 80px;
+  padding-top: 7%;
 }
 
 #getstarted {
   text-decoration: none;
   font-weight: bold;
   color: #39b9d6;
+  font-size: 20px;
 }
 
 #getstarted:hover {
   text-decoration: underline;
+}
+
+.icon {
+  padding-top: 5px;
+}
+
+footer {
+  text-align: center;
+  color: gray;
+  font-size: 15px;
 }

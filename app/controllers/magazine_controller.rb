@@ -2,7 +2,6 @@ require 'httparty'
 
 class MagazineController < ApplicationController
 
-
   def parse_article
      token = ENV["DIFFBOT_TOKEN"]
      url = params[:search]
@@ -14,7 +13,6 @@ class MagazineController < ApplicationController
      @url = response["request"]["pageUrl"]
      @date = response["objects"][0]["date"]
      @text = response["objects"][0]["text"]
-
      render('user/index.html.erb')
   end
 

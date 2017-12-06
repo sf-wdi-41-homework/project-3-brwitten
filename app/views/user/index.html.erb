@@ -1,8 +1,16 @@
-<div> Article info: <br>
-  URL: <%= @url %> <br>
-  Title: <%= @title %> <br>
-  Author: <%= @author %> <br>
-  Source: <%= @source %> <br>
-  Published: <%= @date %> <br>
-  Text: <%= @text %> <br>
-</div>
+
+<body>
+  <div> Article info: <br>
+    URL: <%= @url %> <br>
+    Title: <%= @title %> <br>
+    Author: <%= @author %> <br>
+    Source: <%= @source %> <br>
+    Published: <%= @date %> <br>
+    Text: <%= @text %> <br>
+  </div>
+
+  <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+    <%= submit_tag("Generate PDF") %>
+  <% end %>
+
+</body>
