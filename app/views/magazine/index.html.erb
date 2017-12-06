@@ -2,9 +2,9 @@
 <body>
   <h1> Make your magazine. </h1>
 
-  <p> Which links would you like to include? </p>
+  <p> Paste the link to an article that you you want to incluce in your magazine below.</p>
   <%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
-    <%= text_field_tag :search, params[:url_input], placeholder: "Put URL here...", :required => true, class: "textfield"%>
-    <%= submit_tag("Submit") %>
+    <%= text_field_tag :search, params[:url_input], placeholder: "Paste link here...", :required => true, class: "textfield"%> <br>
+    <%= submit_tag("Create Your Magazine") %>
   <% end %>
 </body>
