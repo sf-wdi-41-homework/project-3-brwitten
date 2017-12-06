@@ -1,3 +1,14 @@
 // Place all the styles related to the twonouns controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  padding-top: 10%;
+}
+
+#welcome {
+  font-family: 'Lobster Two', cursive;
+  font-size: 80px;
+}
