@@ -5,10 +5,20 @@
 body {
   font-family: 'Lato', sans-serif;
   text-align: center;
-  padding-top: 10%;
+  padding-top: 7%;
 }
 
 #welcome {
   font-family: 'Lobster Two', cursive;
   font-size: 80px;
+}
+
+#getstarted {
+  text-decoration: none;
+  font-weight: bold;
+  color: #39b9d6;
+}
+
+#getstarted:hover {
+  text-decoration: underline;
 }
