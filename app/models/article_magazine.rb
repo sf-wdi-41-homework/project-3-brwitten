@@ -1,0 +1,3 @@
+class ArticleMagazine < ApplicationRecord
+
+end
