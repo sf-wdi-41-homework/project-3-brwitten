@@ -9,6 +9,5 @@ Through Two Nouns users can create their own magazines with content from across 
 ### Used Technologies:
 * Ruby
 * Ruby on Rails
-* Nokogiri: https://github.com/sparklemotion/nokogiri
-* Wicked PDF: https://github.com/mileszs/wicked_pdf
+* Diffbot
 * Bcrypt
