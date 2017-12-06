@@ -3,7 +3,7 @@ require 'prawn'
 
 class MagazineController < ApplicationController
 
-  before_filter :authorize
+  before_action :authorize
 
   def parse_article
      token = ENV["DIFFBOT_TOKEN"]
