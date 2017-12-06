@@ -10,6 +10,11 @@ body {
   margin-bottom: -100px;
 }
 
+.mainbuttons {
+  text-align: right;
+  margin-top: 20px;
+}
+
 .landing {
   text-align: center;
 }
@@ -26,10 +31,23 @@ body {
   padding-top: 7%;
 }
 
-#getstarted {
+#getstarted, .authbuttons {
   text-decoration: none;
   font-weight: bold;
   color: #39b9d6;
+}
+
+.authbuttons {
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 15px;
+  margin-left: 10px;
+  background-color: #e6e8ed;
+}
+
+#getstarted {
   font-size: 20px;
 }
 
