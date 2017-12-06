@@ -22,7 +22,12 @@ class MagazineController < ApplicationController
        @url = response["request"]["pageUrl"]
        @date = response["objects"][0]["date"]
        @text = response["objects"][0]["text"]
-       render('user/index.html.erb')
+       Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
+       new_article = Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
+       puts "CURRENT USER"
+       puts current_user.id
+       current_user.articles << new_article
+       render('magazine/index.html.erb')
      end
   end
 
