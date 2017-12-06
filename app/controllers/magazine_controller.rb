@@ -2,8 +2,9 @@ require 'httparty'
 
 class MagazineController < ApplicationController
 
+
   def parse_article
-     token = "bb383b3d967eeea80833c684c7d67164"
+     token = ENV["DIFFBOT_TOKEN"]
      url = params[:search]
      response = HTTParty.get "https://api.diffbot.com/v3/analyze?token=#{token}&url=#{url}"
      @response = response
