@@ -1,6 +1,9 @@
 require 'httparty'
+require 'prawn'
 
 class MagazineController < ApplicationController
+
+  before_filter :authorize
 
   def parse_article
      token = ENV["DIFFBOT_TOKEN"]
