@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/user", to: "user#index", as: "user"
 
   get "/parse_article" => "magazine#parse_article"
-  get "/generate_pdf" => "user#generate_pdf"
+  get "/generate_pdf" => "magazine#generate_pdf"
 
 
 end
