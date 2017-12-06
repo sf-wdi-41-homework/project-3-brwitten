@@ -8,6 +8,7 @@ class MagazineController < ApplicationController
      response = HTTParty.get "https://api.diffbot.com/v3/analyze?token=#{token}&url=#{url}"
      @response = response
      puts @response
+     # response length is a hacky way to know if there was an error in processing the URL
      if response.length == 2
        flash[:notice] = 'Error in processing that URL...'
        redirect_to('/magazine')
@@ -24,7 +25,7 @@ class MagazineController < ApplicationController
 
   def generate_pdf
     pdf = Prawn::Document.new
-    pdf.text "Testing if this creates a PDF"
+    pdf.text "Your response #{@response}"
     send_data pdf.render
   end
 
