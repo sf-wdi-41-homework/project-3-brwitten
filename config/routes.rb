@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   get "/twonouns" => "twonouns#index"
   get "/magazine" => "magazine#index"
   get "/article_list" => "magazine#article_list"
-  get "/user" => "user#index"
+  get "/publish" => "magazine#publish"
 
+  get "/user" => "user#index"
   get "/parse_article" => "magazine#parse_article"
   get "/generate_pdf" => "magazine#generate_pdf"
   delete "delete/:id" => "magazine#delete_article"

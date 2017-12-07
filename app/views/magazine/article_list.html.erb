@@ -7,7 +7,7 @@
 <%= yield %>
 
 <body>
-  <h1> Make your magazine. </h1>
+  <h1> Curate your content. </h1>
 
   <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
@@ -39,8 +39,6 @@
     </ul>
   </div>
 
-  <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
-    <%= submit_tag("Create Your Magazine") %>
-  <% end %>
+<a href="/publish" id="getstarted">Finalize Your Magazine</a>
 
 </body>

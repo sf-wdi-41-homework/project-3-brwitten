@@ -24,7 +24,7 @@ class MagazineController < ApplicationController
     if response.length <= 2
       flash[:notice] = 'Error in processing that URL...'
       # need to fix this redirect; won't make sense if user on article_list page
-      redirect_to('/magazine')
+      redirect_to('/article_list')
     else
       @title = response["objects"][0]["title"] || "No title"
       @author = response["objects"][0]["author"]
@@ -69,6 +69,14 @@ class MagazineController < ApplicationController
     to_delete = UserArticle.where(user_id:current_user.id,article_id:article_id)
     to_delete.destroy_all
     redirect_to('/article_list')
+  end
+
+  def publish
+    @my_articles = UserArticle.where(user_id:current_user.id)
+    @article_list = []
+    @my_articles.each do |article|
+      @article_list << Article.find(article.article_id)
+    end
   end
 
 end

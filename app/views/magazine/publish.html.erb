@@ -1,0 +1,30 @@
+<% if current_user %>
+  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+<% else %>
+  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+<% end %>
+
+<%= yield %>
+
+<body>
+  <h1> Finalize your magazine. </h1>
+
+  <a href="/article_list" id="getstarted">Edit</a>
+
+  <h3> Your magazine will include: </h3>
+
+  <ul>
+    <% @article_list.each do |article| %>
+      <li>
+          <strong><%= article.title %> </strong><br>
+          <%= article.author %><br>
+          <%= article.published %><br>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+    <%= submit_tag("Publish Your Magazine") %>
+  <% end %>
+
+</body>

@@ -7,16 +7,8 @@
 <%= yield %>
 
 <body>
-  <h1> Make your magazine. </h1>
 
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-
-  <p> Paste the link to an article that you you want to incluce in your magazine below.</p>
-  <%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
-    <%= text_field_tag :search, params[:url_input], placeholder: "Paste link here...", :required => true, class: "textfield"%>
-    <%= submit_tag("Add Article") %>
-  <% end %>
+  <h1> Hmm... thanks for looking around. This isn't the right page for you. </h1>
+  <a href="/" id="getstarted">Go Home</a>
 
 </body>
