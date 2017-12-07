@@ -23,7 +23,6 @@ class MagazineController < ApplicationController
     # response length is a hacky way to know if there was an error in processing the URL
     if response.length <= 2
       flash[:notice] = 'Error in processing that URL...'
-      # need to fix this redirect; won't make sense if user on article_list page
       redirect_to('/article_list')
     else
       @title = response["objects"][0]["title"] || "No title"
@@ -39,17 +38,15 @@ class MagazineController < ApplicationController
   end
 
   def generate_pdf
+    new_mag = Magazine.create(name:DateTime.now,user_id:current_user.id)
+    puts "NEW MAG:"
+    puts new_mag
     @my_articles = UserArticle.where(user_id:current_user.id)
     @article_list = []
     @my_articles.each do |article|
-    @article_list << Article.find(article.article_id)
+      @article_list << Article.find(article.article_id)
+      new_mag.articles << Article.find(article.article_id)
     end
-    # @to_print = []
-    # @article_list.each do |article|
-    #   @to_print << article.title
-    #   @to_print << article.author
-    #   @to_print << article.text
-    # end
     pdf = Prawn::Document.new
     pdf.text "Your Two Nouns Magazine", :size => 50
     pdf.text "Created by #{current_user.name}"
