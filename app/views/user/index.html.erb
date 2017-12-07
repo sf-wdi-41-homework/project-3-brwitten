@@ -1,6 +1,21 @@
 
 <body>
 
-<h1> Hello! </h1>
+<h1> Here are your magazines, <%= current_user.name %>. </h1>
+
+<p> These are your magazines & articles. You can download any magazine. </p>
+
+<p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
+  <li> <%= mag.name %> <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+    <%= submit_tag("Download Your Magazine") %>
+  <% end %></li>
+  <% end %>
+
+
+
+
+
+
+
 
 </body>

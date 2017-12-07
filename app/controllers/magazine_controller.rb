@@ -37,28 +37,15 @@ class MagazineController < ApplicationController
     end
   end
 
-  def generate_pdf
+# not currently using this method -- need to add and separte out save and download
+  def save_magazine
     new_mag = Magazine.create(name:DateTime.now,user_id:current_user.id)
-    puts "NEW MAG:"
-    puts new_mag
     @my_articles = UserArticle.where(user_id:current_user.id)
     @article_list = []
     @my_articles.each do |article|
-      @article_list << Article.find(article.article_id)
       new_mag.articles << Article.find(article.article_id)
     end
-    pdf = Prawn::Document.new
-    pdf.text "Your Two Nouns Magazine", :size => 50
-    pdf.text "Created by #{current_user.name}"
-    pdf.start_new_page
-    @article_list.each do |article|
-      pdf.text "Article Title: #{article.title}"
-      pdf.text "Article Author: #{article.author}"
-      pdf.text "#{article.text}"
-      pdf.start_new_page
-    end
-    pdf.text "Woohoo, you made it to the end!", :size => 25
-    send_data pdf.render
+    redirect_to('/user')
   end
 
   def delete_article
