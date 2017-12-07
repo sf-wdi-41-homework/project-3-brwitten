@@ -1,5 +1,6 @@
 require 'httparty'
 require 'prawn'
+require 'open-uri'
 
 class MagazineController < ApplicationController
 
@@ -15,7 +16,8 @@ class MagazineController < ApplicationController
 
   def parse_article
      token = ENV["DIFFBOT_TOKEN"]
-     url = params[:search]
+     input_url = params[:search]
+     url = URI::encode(input_url)
      response = HTTParty.get "https://api.diffbot.com/v3/analyze?token=#{token}&url=#{url}"
      @response = response
      puts @response
@@ -30,10 +32,9 @@ class MagazineController < ApplicationController
        @url = response["request"]["pageUrl"]
        @date = response["objects"][0]["date"]
        @text = response["objects"][0]["text"]
-       Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
        new_article = Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
        current_user.articles << new_article
-       render('magazine/index.html.erb')
+       redirect_to('/article_list')
      end
   end
 
