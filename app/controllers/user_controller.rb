@@ -1,10 +1,5 @@
 class UserController < ApplicationController
 
-  before_action :authorize
-
-  def index
-  end
-
   def new
   end
 
@@ -19,7 +14,11 @@ class UserController < ApplicationController
   end
 
   def index
-    @my_magazines = Magazine.where(user_id:current_user.id)
+    if current_user == nil
+      redirect_to('/')
+    else
+      @my_magazines = Magazine.where(user_id:current_user.id)
+    end
   end
 
   def generate_pdf
