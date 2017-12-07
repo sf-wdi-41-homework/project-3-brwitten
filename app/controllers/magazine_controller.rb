@@ -55,4 +55,14 @@ class MagazineController < ApplicationController
     send_data pdf.render
   end
 
+  def delete_article
+    puts "#{params}"
+    puts "ARTICLE TITLE #{params["article_title"]}"
+    puts "CURRENT USER #{current_user.id}"
+    article_id = Article.where(id:"#{params["id"]}").pluck(:id)
+    to_delete = UserArticle.where(user_id:current_user.id,article_id:article_id)
+    to_delete.destroy_all
+    redirect_to('/article_list')
+  end
+
 end

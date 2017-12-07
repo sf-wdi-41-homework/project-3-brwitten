@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "/parse_article" => "magazine#parse_article"
   get "/generate_pdf" => "magazine#generate_pdf"
+  delete "delete/:id" => "magazine#delete_article"
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
