@@ -51,15 +51,16 @@ class MagazineController < ApplicationController
     #   @to_print << article.text
     # end
     pdf = Prawn::Document.new
-    pdf.text "Your Two Nouns Magazine"
+    pdf.text "Your Two Nouns Magazine", :size => 50
+    pdf.text "Created by #{current_user.name}"
     pdf.start_new_page
     @article_list.each do |article|
-      pdf.text "#{article.title}"
-      pdf.text "#{article.author}"
+      pdf.text "Article Title: #{article.title}"
+      pdf.text "Article Author: #{article.author}"
       pdf.text "#{article.text}"
       pdf.start_new_page
     end
-    pdf.text "Make a new magazine soon."
+    pdf.text "Woohoo, you made it to the end!", :size => 25
     send_data pdf.render
   end
 
