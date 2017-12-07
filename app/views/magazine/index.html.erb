@@ -19,15 +19,21 @@
     <%= submit_tag("Add Article") %>
   <% end %>
 
-  <div> Your Articles: </div>
-
-  <div> Article info: <br>
-    <li> <a class = "articleInfo"> URL: </a> <%= @url %> </li>
-    <li> <a class = "articleInfo"> Title: </a> <%= @title %> </li>
-    <li> <a class = "articleInfo"> Author: </a> <%= @author %> </li>
-    <li> <a class = "articleInfo">Source: </a>  <%= @source %> </li>
-    <li> <a class = "articleInfo"> Published: </a> <%= @date %> </li>
-    <li> <a class = "articleInfo">Text Preview: </a> <%= @text.first(200) %>... </li>
+  <div>
+    <h3> Your Articles: </h3><br>
   </div>
+  <div>
+    <ul>
+      <% @article_list.each do |article| %>
+        <li>
+            <strong><%= article.title %> </strong><br>
+            <%= article.author %><br>
+            <%= article.published %><br>
+            <%= article.url %><br>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
 
 </body>

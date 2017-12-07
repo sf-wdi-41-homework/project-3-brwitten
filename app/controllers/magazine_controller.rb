@@ -5,6 +5,14 @@ class MagazineController < ApplicationController
 
   before_action :authorize
 
+  def index
+    @my_articles = UserArticle.where(user_id:current_user.id)
+    @article_list = []
+    @my_articles.each do |article|
+      @article_list << Article.find(article.article_id)
+    end
+  end
+
   def parse_article
      token = ENV["DIFFBOT_TOKEN"]
      url = params[:search]
@@ -12,7 +20,7 @@ class MagazineController < ApplicationController
      @response = response
      puts @response
      # response length is a hacky way to know if there was an error in processing the URL
-     if response.length == 2
+     if response.length <= 2
        flash[:notice] = 'Error in processing that URL...'
        redirect_to('/magazine')
      else
@@ -24,8 +32,6 @@ class MagazineController < ApplicationController
        @text = response["objects"][0]["text"]
        Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
        new_article = Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
-       puts "CURRENT USER"
-       puts current_user.id
        current_user.articles << new_article
        render('magazine/index.html.erb')
      end
