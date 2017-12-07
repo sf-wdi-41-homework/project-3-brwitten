@@ -9,7 +9,7 @@
 <body>
   <h1> Finalize your magazine. </h1>
 
-  <a href="/article_list" id="getstarted">Edit</a>
+  <a href="/article_list" id="getstarted">Edit Article List</a>
 
   <h3> Your magazine will include: </h3>
 
@@ -24,6 +24,7 @@
   </ul>
 
   <%= form_tag('/save_magazine', method: "get", id: "save_magazine") do %>
+    Magazine Name:     <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%> <br>
     <%= submit_tag("Save Your Magazine") %>
   <% end %>
 

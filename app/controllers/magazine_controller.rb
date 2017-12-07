@@ -39,7 +39,8 @@ class MagazineController < ApplicationController
 
 # not currently using this method -- need to add and separte out save and download
   def save_magazine
-    new_mag = Magazine.create(name:DateTime.now,user_id:current_user.id)
+    mag_name = params[:mag_name]
+    new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
     @my_articles = UserArticle.where(user_id:current_user.id)
     @article_list = []
     @my_articles.each do |article|
