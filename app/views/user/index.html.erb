@@ -1,10 +1,6 @@
 
 <body>
 
-  <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
-    <%= submit_tag("Download PDF Version") %>
-  <% end %>
-
   <div> Article info: <br>
     <li> <a class = "articleInfo"> URL: </a> <%= @url %> </li>
     <li> <a class = "articleInfo"> Title: </a> <%= @title %> </li>

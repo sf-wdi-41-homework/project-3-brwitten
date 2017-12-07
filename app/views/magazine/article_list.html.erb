@@ -1,1 +1,40 @@
-<h1> hello, this is your article list page </h1>
+<% if current_user %>
+  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+<% else %>
+  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+<% end %>
+
+<%= yield %>
+
+<body>
+  <h1> Make your magazine. </h1>
+
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+  <p> Paste the link to an article that you you want to incluce in your magazine below.</p>
+  <%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
+    <%= text_field_tag :search, params[:url_input], placeholder: "Paste link here...", :required => true, class: "textfield"%>
+    <%= submit_tag("Add Another Article") %>
+  <% end %>
+
+  <div>
+    <h3> Your Articles: </h3><br>
+    <ul>
+      <% @article_list.each do |article| %>
+        <li>
+            <strong><%= article.title %> </strong><br>
+            <%= article.author %><br>
+            <%= article.published %><br>
+            <%= article.url %><br>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+    <%= submit_tag("Create Your Magazine") %>
+  <% end %>
+
+</body>

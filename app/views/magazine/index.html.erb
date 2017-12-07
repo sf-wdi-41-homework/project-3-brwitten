@@ -19,19 +19,4 @@
     <%= submit_tag("Add Article") %>
   <% end %>
 
-  <div>
-    <h3> Your Articles: </h3><br>
-    <ul>
-      <% @article_list.each do |article| %>
-        <li>
-            <strong><%= article.title %> </strong><br>
-            <%= article.author %><br>
-            <%= article.published %><br>
-            <%= article.url %><br>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-
 </body>

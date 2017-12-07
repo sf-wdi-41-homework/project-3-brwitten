@@ -6,7 +6,7 @@ class MagazineController < ApplicationController
 
   before_action :authorize
 
-  def index
+  def article_list
     @my_articles = UserArticle.where(user_id:current_user.id)
     @article_list = []
     @my_articles.each do |article|
@@ -32,15 +32,26 @@ class MagazineController < ApplicationController
        @url = response["request"]["pageUrl"]
        @date = response["objects"][0]["date"]
        @text = response["objects"][0]["text"]
-       new_article = Article.find_or_create_by(url:@url, title:@title, author:@author, published:@date, text:@text)
+       new_article = Article.create_with(url:@url, title:@title, author:@author, published:@date, text:@text).find_or_create_by(title:@title)
        current_user.articles << new_article
        redirect_to('/article_list')
      end
   end
 
   def generate_pdf
+    @my_articles = UserArticle.where(user_id:current_user.id)
+    @article_list = []
+    @my_articles.each do |article|
+      @article_list << Article.find(article.article_id)
+    end
+    @to_print = []
+    @article_list.each do |article|
+      @to_print << article.title
+      @to_print << article.author
+      @to_print << article.text
+    end
     pdf = Prawn::Document.new
-    pdf.text "Your response #{@response}"
+    pdf.text "#{@to_print}"
     send_data pdf.render
   end
 
