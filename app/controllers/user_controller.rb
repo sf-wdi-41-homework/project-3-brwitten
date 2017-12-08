@@ -22,16 +22,27 @@ class UserController < ApplicationController
   end
 
   def generate_pdf
-    @my_articles = UserArticle.where(user_id:current_user.id)
-    @article_list = []
-    @my_articles.each do |article|
-      @article_list << Article.find(article.article_id)
+    @mag_id = "#{params["mag_id"]}"
+    puts "MAG ID: #{params["mag_id"]}"
+    @mag_articles = ArticleMagazine.where(magazine_id:@mag_id)
+    # take magazine id and look up all articles in that magazine in Article Magazine table
+    @article_info = []
+    @mag_articles.each do |article|
+      @article_info << Article.find(article.article_id)
     end
+    puts "ARTICLE INFO"
+    puts @article_info
+    # then get article information from the articles table
+    # @my_articles = UserArticle.where(user_id:current_user.id)
+    # @article_list = []
+    # @my_articles.each do |article|
+    #   @article_list << Article.find(article.article_id)
+    # end
     pdf = Prawn::Document.new
     pdf.text "Your Two Nouns Magazine", :size => 50
     pdf.text "Created by #{current_user.name}"
     pdf.start_new_page
-    @article_list.each do |article|
+    @article_info.each do |article|
       pdf.text "Article Title: #{article.title}"
       pdf.text "Article Author: #{article.author}"
       pdf.text "#{article.text}"

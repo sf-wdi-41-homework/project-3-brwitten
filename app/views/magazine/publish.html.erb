@@ -17,14 +17,17 @@
     <% @article_list.each do |article| %>
       <li>
           <strong><%= article.title %> </strong><br>
-          <%= article.author %><br>
-          <%= article.published %><br>
+          Author: <%= article.author %><br>
+          Published: <%= article.published[0..15] %><br>
+          Character Count: <%= article.text.length %><br>
+          <br>
       </li>
     <% end %>
   </ul>
 
   <%= form_tag('/save_magazine', method: "get", id: "save_magazine") do %>
     Magazine Name:     <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%> <br>
+    <br>
     <%= submit_tag("Save Your Magazine") %>
   <% end %>
 
