@@ -32,12 +32,6 @@ class UserController < ApplicationController
     end
     puts "ARTICLE INFO"
     puts @article_info
-    # then get article information from the articles table
-    # @my_articles = UserArticle.where(user_id:current_user.id)
-    # @article_list = []
-    # @my_articles.each do |article|
-    #   @article_list << Article.find(article.article_id)
-    # end
     pdf = Prawn::Document.new
     pdf.text "Your Two Nouns Magazine", :size => 50
     pdf.text "Created by #{current_user.name}"

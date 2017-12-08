@@ -8,9 +8,14 @@ class MagazineController < ApplicationController
 
   def article_list
     @my_articles = UserArticle.where(user_id:current_user.id)
+    @published_articles = ArticleMagazine.pluck(:article_id)
     @article_list = []
+    # for each value check to see if it is present in published articles, if not add to list
     @my_articles.each do |article|
-      @article_list << Article.find(article.article_id)
+      # only adding articles that the user hasn't already published
+      if !@published_articles.include? article.article_id
+        @article_list << Article.find(article.article_id)
+      end
     end
   end
 
