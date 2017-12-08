@@ -21,7 +21,7 @@
 
   <% if @article_list.length > 0 %>
     <div>
-      <h3> Your Articles: </h3><br>
+      <h3> Article List </h3><br>
       <ul>
         <% @article_list.each do |article| %>
           <li>
@@ -39,7 +39,15 @@
         <% end %>
       </ul>
     </div>
-    <a href="/publish" id="getstarted">Finalize</a>
+
+    <h3> Publish Your Magazine </h3><br>
+    <%= form_tag('/save_magazine', method: "get", id: "save_magazine") do %>
+      Magazine Name:     <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%> <br>
+      <br>
+      <%= submit_tag("Publish") %>
+    <% end %>
+
+
   <% end %>
 
 </body>

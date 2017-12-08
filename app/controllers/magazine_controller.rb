@@ -42,14 +42,22 @@ class MagazineController < ApplicationController
     end
   end
 
-# not currently using this method -- need to add and separte out save and download
   def save_magazine
-    mag_name = params[:mag_name]
-    new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
+    ## need to save the articles specifically listed
     @my_articles = UserArticle.where(user_id:current_user.id)
+    @published_articles = ArticleMagazine.pluck(:article_id)
     @article_list = []
     @my_articles.each do |article|
-      new_mag.articles << Article.find(article.article_id)
+      if !@published_articles.include? article.article_id
+        @article_list << Article.find(article.article_id)
+      end
+    end
+    puts @article_list
+    ## save magazine
+    mag_name = params[:mag_name]
+    new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
+    @article_list.each do |article|
+      new_mag.articles << article
     end
     redirect_to('/user')
   end
