@@ -17,7 +17,7 @@ class UserController < ApplicationController
     if current_user == nil
       redirect_to('/')
     else
-      @my_magazines = Magazine.where(user_id:current_user.id)
+      @my_magazines = Magazine.where(user_id:current_user.id).order(created_at: :desc)
     end
   end
 
@@ -45,17 +45,12 @@ class UserController < ApplicationController
 
   def delete_magazine
     @mag_id = "#{params["mag_id"]}"
-    puts @mag_id
-    #find in magazinearticle
+    @delete_articles = ArticleMagazine.where(magazine_id:@mag_id).pluck(:article_id)
     ArticleMagazine.where(magazine_id:@mag_id).destroy_all
     Magazine.where(id:@mag_id).destroy_all
-    #get article ids
-    #delete from magazine
-    #delete articles
-    #delete from article magazine
-    # to_delete = ArticleMagazine.where(magazine_id:@mag_id)
-    # puts to_delete
-    # to_delete.destroy_all
+    @delete_articles.each do |article|
+      Article.where(id:article).destroy_all
+    end
     redirect_to('/user')
   end
 
