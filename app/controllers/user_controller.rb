@@ -8,6 +8,7 @@ class UserController < ApplicationController
     if user.save
       session[:user_id] = user.id
       redirect_to '/article_list'
+      UserMailer.welcome_email(@user).deliver_now
     else
       redirect_to '/signup'
     end
