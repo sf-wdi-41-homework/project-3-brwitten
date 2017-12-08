@@ -27,16 +27,20 @@
       <ul>
         <% @article_list.each do |article| %>
           <li>
-              <strong><a href=<%= article.url %> > <%= article.title %> </a></strong><br>
-              <%= article.author %><br>
-              <%= article.published %><br>
+              <strong><a href=<%= article.url %> > <%= article.title %> </strong>
+                <a>
+                  <%= form_tag('/delete/' + article["id"].to_s, method: "delete", id: "delete_article") do %>
+                  <input type="hidden" name="article_title" value="<%= article["title"] %>"/>
+                  <button> Remove Article </button>
+                  <% end %>
+                </a>  
+              </a>
               <br>
-              <p>
-                <%= form_tag('/delete/' + article["id"].to_s, method: "delete", id: "delete_article") do %>
-                <input type="hidden" name="article_title" value="<%= article["title"] %>"/>
-                <button> Remove Article </button>
-                <% end %>
-              </p>
+              Author: <%= article.author %><br>
+              Published: <%= article.published[0..15] %><br>
+              Character Count: <%= article.text.length %><br>
+              <br>
+
           </li>
         <% end %>
       </ul>
