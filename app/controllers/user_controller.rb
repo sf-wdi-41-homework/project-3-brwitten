@@ -23,15 +23,12 @@ class UserController < ApplicationController
 
   def generate_pdf
     @mag_id = "#{params["mag_id"]}"
-    puts "MAG ID: #{params["mag_id"]}"
     @mag_articles = ArticleMagazine.where(magazine_id:@mag_id)
     # take magazine id and look up all articles in that magazine in Article Magazine table
     @article_info = []
     @mag_articles.each do |article|
       @article_info << Article.find(article.article_id)
     end
-    puts "ARTICLE INFO"
-    puts @article_info
     pdf = Prawn::Document.new
     pdf.text "Your Two Nouns Magazine", :size => 50
     pdf.text "Created by #{current_user.name}"
@@ -44,6 +41,22 @@ class UserController < ApplicationController
     end
     pdf.text "Woohoo, you made it to the end!", :size => 25
     send_data pdf.render
+  end
+
+  def delete_magazine
+    @mag_id = "#{params["mag_id"]}"
+    puts @mag_id
+    #find in magazinearticle
+    ArticleMagazine.where(magazine_id:@mag_id).destroy_all
+    Magazine.where(id:@mag_id).destroy_all
+    #get article ids
+    #delete from magazine
+    #delete articles
+    #delete from article magazine
+    # to_delete = ArticleMagazine.where(magazine_id:@mag_id)
+    # puts to_delete
+    # to_delete.destroy_all
+    redirect_to('/user')
   end
 
   def user_params

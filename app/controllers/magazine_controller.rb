@@ -63,6 +63,7 @@ class MagazineController < ApplicationController
   end
 
   def delete_article
+    puts "DEL ARTICLE BEING CALLED"
     article_id = Article.where(id:"#{params["id"]}").pluck(:id)
     to_delete = UserArticle.where(user_id:current_user.id,article_id:article_id)
     to_delete.destroy_all

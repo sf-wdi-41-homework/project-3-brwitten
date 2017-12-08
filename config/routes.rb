@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/parse_article" => "magazine#parse_article"
   get "/save_magazine" => "magazine#save_magazine"
   delete "delete/:id" => "magazine#delete_article"
+  delete "delete_mag/:id" => "user#delete_magazine"
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

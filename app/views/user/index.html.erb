@@ -12,11 +12,18 @@
 <a href="/article_list" id="getstarted">Make another magazine.</a>
 
 <p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
-  <li> <%= mag.name %> <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
-    <br>
-    <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+  <li>
+    <%= mag.name %> <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+      <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
     <%= submit_tag("Download #{mag.name}") %>
-  <% end %></li>
+    <% end %>
+
+    <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
+      <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+      <button> Delete <%= mag.name %> </button>
+    <% end %>
+
+  </li>
 <% end %>
 
 
