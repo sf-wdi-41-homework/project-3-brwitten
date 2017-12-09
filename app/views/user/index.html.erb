@@ -13,32 +13,31 @@
 </header>
 <body>
 
-<h1> Here are your magazines, <%= current_user.name %>. </h1>
+  <% if @my_magazines.length > 0 %>
+    <h1> Manage your magazines. </h1>
 
-<a href="/article_list" id="getstarted">Make another magazine.</a>
+    <a href="/article_list" id="getstarted">Make another magazine.</a>
 
-<p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
-  <li>
-    <a> <%= mag.name %> </a> <br>
-    <a> Created: <%= mag.created_at %> </a>
-    <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
-      <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-    <%= submit_tag("Download #{mag.name}") %>
+    <p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
+      <li>
+        <a> <%= mag.name %> </a> <br>
+        <a> Created: <%= mag.created_at %> </a>
+        <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+          <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+        <%= submit_tag("Download #{mag.name}") %>
+        <% end %>
+
+        <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
+          <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+          <button> Delete <%= mag.name %> </button>
+        <% end %>
+      </li>
     <% end %>
 
-    <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
-      <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-      <button> Delete <%= mag.name %> </button>
-    <% end %>
-
-  </li>
-<% end %>
-
-
-
-
-
-
-
+  <% else %>
+    <h1> Manage your magazines.</h1>
+    <a> You don't have any magazines right now.</a> <br>
+    <a href="/article_list" id="getstarted">Make one now.</a>
+  <% end %>
 
 </body>
