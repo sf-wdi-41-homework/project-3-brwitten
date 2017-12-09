@@ -1,10 +1,16 @@
-<% if current_user %>
-  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-<% end %>
+<link href="https://fonts.googleapis.com/css?family=Lato|Lobster+Two" rel="stylesheet">
 
-<%= yield %>
+<header>
+  <div class="topnav">
+    <% if current_user %>
+      Welcome, <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+    <% else %>
+      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+    <% end %>
 
-
+    <%= yield %>
+  </div>
+</header>
 <body>
 
 <h1> Here are your magazines, <%= current_user.name %>. </h1>

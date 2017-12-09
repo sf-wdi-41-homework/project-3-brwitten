@@ -2,12 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
+
+html, body, header {
   font-family: 'Lato', sans-serif;
-  padding-left: 2%;
-  padding-right: 2%;
   min-height: 100%;
-  margin-bottom: -100px;
+  text-decoration: none;
+  background-color: #f2f2f2;
+}
+
+.topnav {
+  text-align: right;
+}
+
+.topnav a {
+    text-decoration: none;
+    color: #39b9d6;
+    font-weight: bold;
+}
+.topnav a:hover {
+    text-decoration: underline;
 }
 
 .mainbuttons {

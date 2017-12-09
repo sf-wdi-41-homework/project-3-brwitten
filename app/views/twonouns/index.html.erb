@@ -1,15 +1,18 @@
 <link href="https://fonts.googleapis.com/css?family=Lato|Lobster+Two" rel="stylesheet">
 
 <header>
+  <div class="topnav">
+    <% if current_user %>
+      Welcome, <%= current_user.name %> | <%= link_to "Logout", '/logout' %> | <%= link_to "Your Magazines", '/user' %>
+    <% else %>
+      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+    <% end %>
 
+    <%= yield %>
+  </div>
 </header>
 
 <body>
-
-  <div class="mainbuttons">
-      <a class="authbuttons" href="/login">Login</a>
-      <a class="authbuttons" href="/signup">Signup</a>
-  </div>
 
   <div class="landing">
     <h1 id="welcome"> Two Nouns</h1>
