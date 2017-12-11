@@ -1,3 +1,30 @@
 // Place all the styles related to the magazine controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.buttonicon {
+  margin-right: 10px;
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.pagebody {
+  margin-left: 5%;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 10;
+}
+
+.buttonicon:hover .tooltip {
+  visibility: visible;
+}
