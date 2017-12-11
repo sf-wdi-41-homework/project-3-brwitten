@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
     @user = current_user
     # need to update URL once deployed
     @url  = 'http://twonouns.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    mail(to: @user.email, subject: 'Welcome to Two Nouns')
   end
 
 end
