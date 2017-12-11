@@ -18,33 +18,35 @@
 
     <a href="/article_list" id="getstarted">Make another magazine.</a>
 
-    <p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
-      <li>
-        <a> <strong> <%= mag.name %> </a> </strong> <br>
-        <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a> <br>
+    <div class="pagebody">
+      <h3> Here are your magazines: </h3> <% @my_magazines.each do |mag| %> </p>
+        <li>
+          <a> <strong> <%= mag.name %> </a> </strong> <br>
+          <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a> <br>
+          <div id="threeicons">
+            <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
+              <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+              <button class="buttonicon"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/464-200.png" height="20px" title="Download"></button>
+            <% end %>
 
-        <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
-          <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-          <button> Download <%= mag.name %> </button>
-        <% end %>
+            <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
+              <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+              <button class="buttonicon"><img src="http://www.pvhc.net/img5/kwjcnwjzabdmfcvzkbzy.png" height="20px" title="Delete"></button>
+            <% end %>
 
-        <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
-          <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-          <button> Delete <%= mag.name %> </button>
-        <% end %>
+            <%= form_tag('/email_mag/' + mag["id"].to_s, method: "get", id: "email_magazine") do %>
+              <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+              <button class="buttonicon"><img src="http://www.clker.com/cliparts/W/j/m/3/u/z/email-icon-hi.png" height="20px" title="Email"></button>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
 
-        <%= form_tag('/email_mag/' + mag["id"].to_s, method: "get", id: "email_magazine") do %>
-          <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-          <button> Email <%= mag.name %> </button>
-        <% end %>
-
-      </li>
+    <% else %>
+      <h1> Manage your magazines.</h1>
+      <a> You don't have any magazines right now.</a> <br>
+      <a href="/article_list" id="getstarted">Make one now.</a>
     <% end %>
-
-  <% else %>
-    <h1> Manage your magazines.</h1>
-    <a> You don't have any magazines right now.</a> <br>
-    <a href="/article_list" id="getstarted">Make one now.</a>
-  <% end %>
+  </div>
 
 </body>
