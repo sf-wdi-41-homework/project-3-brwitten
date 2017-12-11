@@ -34,7 +34,7 @@
         <% @article_list.each do |article| %>
           <li>
               <strong><a href=<%= article.url %> > <%= article.title %> </strong>
-                <a>
+               <a>
                   <%= form_tag('/delete/' + article["id"].to_s, method: "delete", id: "delete_article") do %>
                   <input type="hidden" name="article_title" value="<%= article["title"] %>"/>
                   <button> Remove Article </button>

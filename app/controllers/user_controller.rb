@@ -31,9 +31,9 @@ class UserController < ApplicationController
     end
     pdf = Prawn::Document.new
     pdf.font("Courier") do
-      pdf.draw_text "#{current_user.name}'s", :at => [200, 450], :size => 35
-      pdf.draw_text "Two Nouns Magazine", :at => [70, 400], :size => 35
-      pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [110, 350], :size => 25
+      pdf.draw_text "#{current_user.name}'s", :at => [10, 650], :size => 35
+      pdf.draw_text "Two Nouns Magazine", :at => [10, 600], :size => 35
+      pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [10, 550], :size => 25
       pdf.start_new_page
     end
     pdf.font("Times-Roman") do

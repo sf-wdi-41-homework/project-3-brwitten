@@ -20,8 +20,8 @@
 
     <p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
       <li>
-        <a> <%= mag.name %> </a> <br>
-        <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a>
+        <a> <strong> <%= mag.name %> </a> </strong> <br>
+        <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a> <br>
         <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
           <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
         <%= submit_tag("Download #{mag.name}") %>
