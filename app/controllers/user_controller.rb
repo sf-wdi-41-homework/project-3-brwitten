@@ -25,22 +25,28 @@ class UserController < ApplicationController
   def generate_pdf
     @mag_id = "#{params["mag_id"]}"
     @mag_articles = ArticleMagazine.where(magazine_id:@mag_id)
-    # take magazine id and look up all articles in that magazine in Article Magazine table
     @article_info = []
     @mag_articles.each do |article|
       @article_info << Article.find(article.article_id)
     end
     pdf = Prawn::Document.new
-    pdf.text "Your Two Nouns Magazine", :size => 50
-    pdf.text "Created by #{current_user.name}"
-    pdf.start_new_page
-    @article_info.each do |article|
-      pdf.text "Article Title: #{article.title}"
-      pdf.text "Article Author: #{article.author}"
-      pdf.text "#{article.text}"
+    pdf.font("Courier") do
+      pdf.draw_text "#{current_user.name}'s", :at => [200, 450], :size => 35
+      pdf.draw_text "Two Nouns Magazine", :at => [70, 400], :size => 35
+      pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [110, 350], :size => 25
       pdf.start_new_page
     end
-    pdf.text "Woohoo, you made it to the end!", :size => 25
+    pdf.font("Times-Roman") do
+      @article_info.each do |article|
+        pdf.text "#{article.title}", :style => :bold
+        pdf.text "Written By: #{article.author}", :style => :italic
+        pdf.pad_top(10) do
+          pdf.text "#{article.text}"
+        end
+        pdf.start_new_page
+      end
+    end
+    pdf.draw_text "Thanks for using Two Nouns", :at => [100, 350], :style => :italic, :size => 25
     send_data pdf.render
   end
 
