@@ -61,6 +61,18 @@ class UserController < ApplicationController
     redirect_to('/user')
   end
 
+  def email_magazine
+    @mag_id = "#{params["mag_id"]}"
+    @mag_articles = ArticleMagazine.where(magazine_id:@mag_id)
+    @article_info = []
+    @mag_articles.each do |article|
+      @article_info << Article.find(article.article_id)
+    end
+    @user = current_user
+    UserMailer.attach_magazine(@user).deliver_now
+    redirect_to('/user')
+  end
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get "/user" => "user#index"
   get "/generate_pdf" => "user#generate_pdf"
+  get "/email_mag/:id" => "user#email_magazine"
   get '/signup' => 'user#new'
   post '/signup' => 'user#create'
 

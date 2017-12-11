@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Welcome to Two Nouns')
   end
 
+  def attach_magazine(current_user)
+    @user = current_user
+    mail(to: @user.email, subject: 'Here is Your Magazine')
+  end
+
 end
