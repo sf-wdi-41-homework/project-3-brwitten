@@ -47,7 +47,7 @@ class UserController < ApplicationController
       end
     end
     pdf.draw_text "Thanks for using Two Nouns", :at => [100, 350], :style => :italic, :size => 25
-    send_data pdf.render
+    send_data pdf.render, :disposition => 'inline'
   end
 
   def delete_magazine
@@ -69,7 +69,7 @@ class UserController < ApplicationController
       @article_info << Article.find(article.article_id)
     end
     @user = current_user
-    UserMailer.attach_magazine(@user).deliver_now
+    UserMailer.attach_magazine(@user,@article_info).deliver_now
     redirect_to('/user')
   end
 
