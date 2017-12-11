@@ -25,7 +25,7 @@
 
         <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
           <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-        <%= submit_tag("Download #{mag.name}") %>
+          <button> Download <%= mag.name %> </button>
         <% end %>
 
         <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
