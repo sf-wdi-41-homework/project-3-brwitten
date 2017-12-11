@@ -22,15 +22,16 @@
   <% end %>
 
   <div class="articlebody">
-    <p> Paste the link to an article that you you want to incluce in your magazine below.</p>
+    <h3> Article List </h3>
+
     <%= form_tag('/parse_article', method: "get", id: "parse_article") do %>
-      <%= text_field_tag :search, params[:url_input], placeholder: "Paste link here...", :required => true, class: "textfield"%>
+      <%= text_field_tag :search, params[:url_input], placeholder: "Paste URL here...", :required => true, class: "textfield"%>
       <%= submit_tag("Add Article") %>
     <% end %>
 
     <% if @article_list.length > 0 %>
+
       <div>
-        <h3> Article List </h3><br>
         <ul>
           <% @article_list.each do |article| %>
             <li>
@@ -46,18 +47,15 @@
                     <% end %>
                  </a>
 
-
-
             </li>
           <% end %>
         </ul>
       </div>
 
-      <h3> Publish Your Magazine </h3><br>
+      <h3> Publish Your Magazine </h3>
       <%= form_tag('/save_magazine', method: "get", id: "save_magazine") do %>
-        Magazine Name:     <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%> <br>
-        <br>
-        <%= submit_tag("Publish") %>
+        <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%>
+        <%= submit_tag("Publish Magazine") %>
       <% end %>
 
 

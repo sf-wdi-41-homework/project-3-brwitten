@@ -8,6 +8,11 @@ html, body, header {
   min-height: 100%;
   text-decoration: none;
   background-color: #f2f2f2;
+  padding: 3px;
+}
+
+a:link, a:visited {
+  color: #d66839;
 }
 
 .topnav {
