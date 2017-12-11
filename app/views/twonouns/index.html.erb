@@ -3,9 +3,9 @@
 <header>
   <div class="topnav">
     <% if current_user %>
-      Welcome, <%= current_user.name %> | <%= link_to "Logout", '/logout' %> | <%= link_to "Your Magazines", '/user' %>
+      Welcome, <%= current_user.name %> | <%= link_to "Log Out", '/logout' %> | <%= link_to "Your Magazines", '/user' %>
     <% else %>
-      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+      <%= link_to 'Log In', '/login' %> | <%= link_to 'Sign Up', '/signup' %>
     <% end %>
 
     <%= yield %>

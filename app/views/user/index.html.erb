@@ -3,9 +3,9 @@
 <header>
   <div class="topnav">
     <% if current_user %>
-      Welcome, <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+      Welcome, <%= current_user.name %> | <%= link_to "Log Out", '/logout' %>
     <% else %>
-      <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+      <%= link_to 'Log In', '/login' %> | <%= link_to 'Sign Up', '/signup' %>
     <% end %>
 
     <%= yield %>
@@ -21,7 +21,7 @@
     <p> Here are your magazines: <% @my_magazines.each do |mag| %> </p>
       <li>
         <a> <%= mag.name %> </a> <br>
-        <a> Created: <%= mag.created_at %> </a>
+        <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a>
         <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
           <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
         <%= submit_tag("Download #{mag.name}") %>
