@@ -7,10 +7,19 @@
   <body>
     <h1>Here is your Two Noun's Magazine</h1>
     <p>
-      Hi, <%= @user.name %>. Please find the magazine you requested attached. <br>
-    </p>
-      <p> <%= @article_info %> </p>
+      Hi, <%= @user.name %>. Please find the text from your magazine below. <br>
+      <br>
+      <a>Thanks for using Two Nouns!</a>
 
-    <p>Thanks for using Two Nouns!</p>
+    </p>
+    <p> <% @article_info.each do |article| %>
+      <%= article.title %> <br>
+      <%= article.url %> <br>
+      <%= article.author %><br>
+      <%= article.text %><br>
+      <br>
+      <% end %>
+
+
   </body>
 </html>
