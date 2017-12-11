@@ -30,12 +30,13 @@ html, body, header {
 
 .landing {
   text-align: center;
+  height: 100%;
 }
 
 .landing:after {
     content: "";
     display: block;
-    height: 140px;
+    height: 200px;
 }
 
 #welcome {
@@ -72,8 +73,18 @@ html, body, header {
   padding-top: 5px;
 }
 
+.header {
+  font-family: 'Lobster Two'
+}
+
 footer {
   text-align: center;
   color: gray;
   font-size: 15px;
+}
+
+footer:after {
+    content: "";
+    display: block;
+    height: 20px;
 }
