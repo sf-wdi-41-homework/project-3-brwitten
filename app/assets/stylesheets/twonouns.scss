@@ -27,7 +27,7 @@ a:link:hover, a:visited:hover {
 
 .topnav a {
     text-decoration: none;
-    color: #00BCD4;
+    color: #00838F;
     font-weight: bold;
 }
 .topnav a:hover {
@@ -56,10 +56,15 @@ a:link:hover, a:visited:hover {
   padding-top: 7%;
 }
 
+h1 {
+  font-family: 'Lobster Two', cursive;
+  font-size: 45px;
+}
+
 #getstarted, .authbuttons {
   text-decoration: none;
   font-weight: bold;
-  color: #00BCD4;
+  color: #D76500;
 }
 
 .authbuttons {

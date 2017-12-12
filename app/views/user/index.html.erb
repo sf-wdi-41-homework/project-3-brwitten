@@ -26,7 +26,7 @@
           <div id="threeicons">
             <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
               <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-              <button class="buttonicon"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/464-200.png" height="20px" title="Download"><span class="tooltip">Download magazine</span></button>
+              <button class="buttonicon"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/464-200.png" height="20px" title="Download"><span class="tooltip">Download a PDF of your magazine</span></button>
             <% end %>
 
             <%= form_tag('/email_mag/' + mag["id"].to_s, method: "get", id: "email_magazine") do %>
@@ -36,7 +36,7 @@
 
             <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
               <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-              <button class="buttonicon"><img src="http://www.pvhc.net/img5/kwjcnwjzabdmfcvzkbzy.png" height="20px" title="Delete"><span class="tooltip">Delete magazine</span></button>
+              <button class="buttonicon"><img src="http://www.pvhc.net/img5/kwjcnwjzabdmfcvzkbzy.png" height="20px" title="Delete"><span class="tooltip">Delete magazine (forever)</span></button>
             <% end %>
           </div>
         </li>
