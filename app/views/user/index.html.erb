@@ -18,6 +18,10 @@
 
     <a href="/article_list" id="getstarted">Make another magazine.</a>
 
+    <% if flash[:success] %>
+      <div class="notice"><%= flash[:success] %></div>
+    <% end %>
+
     <div class="pagebody">
       <% @my_magazines.each do |mag| %> </p>
         <li>

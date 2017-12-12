@@ -70,6 +70,7 @@ class UserController < ApplicationController
     end
     @user = current_user
     UserMailer.attach_magazine(@user,@article_info).deliver_now
+    flash[:success]= "Magazine successfully sent. Check your email."
     redirect_to('/user')
   end
 
