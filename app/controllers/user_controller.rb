@@ -30,20 +30,16 @@ class UserController < ApplicationController
       @article_info << Article.find(article.article_id)
     end
     pdf = Prawn::Document.new
-    pdf.font("Courier") do
-      pdf.draw_text "#{current_user.name}'s", :at => [10, 650], :size => 35
-      pdf.draw_text "Two Nouns Magazine", :at => [10, 600], :size => 35
-      pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [10, 550], :size => 25
+    pdf.draw_text "#{current_user.name}'s", :at => [10, 650], :size => 35
+    pdf.draw_text "Two Nouns Magazine", :at => [10, 600], :size => 35
+    pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [10, 550], :size => 25
+    pdf.start_new_page
+    @article_info.each do |article|
+      pdf.text "#{article.title}", :style => :bold
+      pdf.text "Written By: #{article.author}", :style => :italic
+      pdf.pad_top(10) do
+        pdf.text "#{article.text}"
       pdf.start_new_page
-    end
-    pdf.font("Times-Roman") do
-      @article_info.each do |article|
-        pdf.text "#{article.title}", :style => :bold
-        pdf.text "Written By: #{article.author}", :style => :italic
-        pdf.pad_top(10) do
-          pdf.text "#{article.text}"
-        end
-        pdf.start_new_page
       end
     end
     pdf.draw_text "Thanks for using Two Nouns", :at => [100, 350], :style => :italic, :size => 25
