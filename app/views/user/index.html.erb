@@ -17,6 +17,7 @@
     <h1> Manage your magazines. </h1>
 
     <a href="/article_list" id="getstarted">Make another magazine.</a>
+    <p> All of your existing magazines are below. <br> You can download, email, and delete each magazine. </p>
 
     <% if flash[:success] %>
       <div class="notice"><%= flash[:success] %></div>
@@ -49,6 +50,7 @@
     <% else %>
       <h1> Manage your magazines.</h1>
       <a href="/article_list" id="getstarted">Make a magazine now.</a>
+      <p> Once you make a magazine you will be able to download, email, and delete the magazine from this page. </p>
     <% end %>
   </div>
 
