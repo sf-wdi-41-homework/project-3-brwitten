@@ -27,7 +27,7 @@ class MagazineController < ApplicationController
     @response = response
     # response length is a hacky way to know if there was an error in processing the URL
     if response.length <= 2
-      flash[:notice] = 'Error in processing that URL...'
+      flash[:notice] = 'This is embarassing. That link cannot be processed. Please try a different one.'
       redirect_to('/article_list')
     else
       @title = response["objects"][0]["title"] || "No title"
