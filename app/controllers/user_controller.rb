@@ -24,6 +24,7 @@ class UserController < ApplicationController
 
   def generate_pdf
     @mag_id = "#{params["mag_id"]}"
+    @mag_title = Magazine.where(id:@mag_id).pluck("name").first
     @mag_articles = ArticleMagazine.where(magazine_id:@mag_id)
     @article_info = []
     @mag_articles.each do |article|
@@ -31,8 +32,9 @@ class UserController < ApplicationController
     end
     pdf = Prawn::Document.new
     pdf.draw_text "#{current_user.name}'s", :at => [10, 650], :size => 35
-    pdf.draw_text "Two Nouns Magazine", :at => [10, 600], :size => 35
-    pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [10, 550], :size => 25
+    pdf.draw_text "Two Nouns Magazine:", :at => [10, 600], :size => 35
+    pdf.draw_text "#{@mag_title}", :at => [10, 550], :size => 35
+    pdf.draw_text "Created on #{Time.now.strftime("%m/%d/%Y")}", :at => [10, 500], :size => 25
     pdf.start_new_page
     @article_info.each do |article|
       pdf.text "#{article.title}", :style => :bold
