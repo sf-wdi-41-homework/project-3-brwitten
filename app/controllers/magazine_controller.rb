@@ -60,7 +60,7 @@ class MagazineController < ApplicationController
     puts @article_list
     ## save magazine
     mag_name = params[:mag_name]
-    if mag_name =~ /^[0-9a-zA-Z]*$/
+    if mag_name =~ /^[0-9a-zA-Z_ -]*$/
       new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
       @article_list.each do |article|
         new_mag.articles << article
