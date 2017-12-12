@@ -1,7 +1,9 @@
 # Two Nouns
 
 This is my final project for WDI 41.
+
 Checkout my Github here: https://github.com/brwitten
+
 See Two Nouns live here: https://lit-ridge-92986.herokuapp.com
 
 ![](screenshot.png?raw=true)
