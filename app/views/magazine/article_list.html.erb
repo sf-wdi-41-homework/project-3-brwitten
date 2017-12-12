@@ -53,6 +53,11 @@
       </div>
 
       <h3> Publish Your Magazine </h3>
+
+      <% if flash[:name_warning] %>
+        <div class="notice"><%= flash[:name_warning] %></div>
+      <% end %>
+
       <%= form_tag('/save_magazine', method: "get", id: "save_magazine") do %>
         <%= text_field_tag :mag_name, params[:url_input], placeholder: "Name your magazine", :required => true, class: "textfield"%>
         <%= submit_tag("Publish Magazine") %>

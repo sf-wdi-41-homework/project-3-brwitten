@@ -22,22 +22,27 @@ class MagazineController < ApplicationController
   def parse_article
     token = ENV["DIFFBOT_TOKEN"]
     input_url = params[:search]
-    url = URI::encode(input_url)
-    response = HTTParty.get "https://api.diffbot.com/v3/analyze?token=#{token}&url=#{url}"
-    @response = response
-    # response length is a hacky way to know if there was an error in processing the URL
-    if response.length <= 2
-      flash[:notice] = 'This is embarassing. That link cannot be processed. Please try a different one.'
-      redirect_to('/article_list')
+    if input_url =~ /\A#{URI::regexp}\z/
+      url = URI::encode(input_url)
+      response = HTTParty.get "https://api.diffbot.com/v3/analyze?token=#{token}&url=#{url}"
+      @response = response
+      # response length is a hacky way to know if there was an error in processing the URL
+      if response.length <= 2
+        flash[:notice] = 'This is embarassing. That link cannot be processed. Please try a different one.'
+        redirect_to('/article_list')
+      else
+        @title = response["objects"][0]["title"] || "No title"
+        @author = response["objects"][0]["author"]
+        @source = response["objects"][0]["siteName"]
+        @url = response["request"]["pageUrl"]
+        @date = response["objects"][0]["date"]
+        @text = response["objects"][0]["text"]
+        new_article = Article.create_with(url:@url, title:@title, author:@author, published:@date, text:@text).find_or_create_by(title:@title)
+        current_user.articles << new_article
+        redirect_to('/article_list')
+      end
     else
-      @title = response["objects"][0]["title"] || "No title"
-      @author = response["objects"][0]["author"]
-      @source = response["objects"][0]["siteName"]
-      @url = response["request"]["pageUrl"]
-      @date = response["objects"][0]["date"]
-      @text = response["objects"][0]["text"]
-      new_article = Article.create_with(url:@url, title:@title, author:@author, published:@date, text:@text).find_or_create_by(title:@title)
-      current_user.articles << new_article
+      flash[:notice] = 'This is embarassing. That link cannot be processed. Please try a different one.'
       redirect_to('/article_list')
     end
   end
@@ -55,11 +60,16 @@ class MagazineController < ApplicationController
     puts @article_list
     ## save magazine
     mag_name = params[:mag_name]
-    new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
-    @article_list.each do |article|
-      new_mag.articles << article
+    if mag_name =~ /^[0-9a-zA-Z]*$/
+      new_mag = Magazine.create(name:mag_name,user_id:current_user.id)
+      @article_list.each do |article|
+        new_mag.articles << article
+      end
+      redirect_to('/user')
+    else
+      flash[:name_warning] = 'Please only use numbers and letters in your magazine name.'
+      redirect_to('/article_list')
     end
-    redirect_to('/user')
   end
 
   def delete_article
