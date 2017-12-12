@@ -12,8 +12,13 @@ html, body, header {
 }
 
 a:link, a:visited {
-  color: #c45d30;
+  color: #00838F;
   text-decoration: none;
+}
+
+a:link:hover, a:visited:hover {
+  color: #00838F;
+  text-decoration: underline;
 }
 
 .topnav {
@@ -22,7 +27,7 @@ a:link, a:visited {
 
 .topnav a {
     text-decoration: none;
-    color: #39b9d6;
+    color: #00BCD4;
     font-weight: bold;
 }
 .topnav a:hover {
@@ -54,7 +59,7 @@ a:link, a:visited {
 #getstarted, .authbuttons {
   text-decoration: none;
   font-weight: bold;
-  color: #39b9d6;
+  color: #00BCD4;
 }
 
 .authbuttons {
@@ -84,7 +89,7 @@ a:link, a:visited {
 }
 
 #howto {
-  border-top: 2px solid #39b9d6;
+  border-top: 2px solid #00BCD4;
   margin-left: 20%;
   margin-right: 20%;
   padding-top: 150px;

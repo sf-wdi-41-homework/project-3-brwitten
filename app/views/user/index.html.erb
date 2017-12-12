@@ -21,7 +21,7 @@
     <div class="pagebody">
       <% @my_magazines.each do |mag| %> </p>
         <li>
-          <a> <strong> <%= mag.name %> </a> </strong> <br>
+          <a class="magtitle"> <strong> <%= mag.name %> </a> </strong> <br>
           <a> Created: <%= mag.created_at.strftime("%m/%d/%Y") %> </a> <br>
           <div id="threeicons">
             <%= form_tag('/generate_pdf', method: "get", id: "generate_pdf") do %>
@@ -29,14 +29,14 @@
               <button class="buttonicon"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/464-200.png" height="20px" title="Download"><span class="tooltip">Download magazine</span></button>
             <% end %>
 
+            <%= form_tag('/email_mag/' + mag["id"].to_s, method: "get", id: "email_magazine") do %>
+              <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
+              <button class="buttonicon"><img src="http://freevector.co/wp-content/uploads/2013/11/69343-email-icon.png" height="20px" title="Email"><span class="tooltip">Email magazine to your account email address.</span></button>
+            <% end %>
+
             <%= form_tag('/delete_mag/' + mag["id"].to_s, method: "delete", id: "delete_magazine") do %>
               <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
               <button class="buttonicon"><img src="http://www.pvhc.net/img5/kwjcnwjzabdmfcvzkbzy.png" height="20px" title="Delete"><span class="tooltip">Delete magazine</span></button>
-            <% end %>
-
-            <%= form_tag('/email_mag/' + mag["id"].to_s, method: "get", id: "email_magazine") do %>
-              <input type="hidden" name="mag_id" value="<%= mag["id"] %>"/>
-              <button class="buttonicon"><img src="http://www.clker.com/cliparts/W/j/m/3/u/z/email-icon-hi.png" height="20px" title="Email"><span class="tooltip">Email magazine</span></button>
             <% end %>
           </div>
         </li>
